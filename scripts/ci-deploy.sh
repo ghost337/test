@@ -4,7 +4,10 @@ set -e
 
 echo "hello world 123!"
 
+echo $mykey
+echo "---"
 export mykey="$mykey"
+echo $mykey
 
 envsubst <./docker-compose.yml >./docker-compose.yml.out
 mv ./docker-compose.yml.out ./docker-compose.yml
