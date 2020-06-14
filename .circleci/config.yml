@@ -4,20 +4,23 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
-      IMAGE_NAME: user12/test
+      IMAGE_NAME: user12/nginx
     working_directory: ~/app
     steps:
       - checkout
       - setup_remote_docker
+      - add_ssh_keys:
+          fingerprints:
+            - "75:80:fa:74:04:be:c0:50:da:2c:ba:45:5b:a2:09:0d"
       - run:
-          name: Build Docker image
+          name: Build Docker images
           command: |
-            docker build -t $IMAGE_NAME:latest .
+            docker-compose build
       - run:
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$CIRCLE_SHA1
+            docker tag $IMAGE_NAME:mainline $IMAGE_NAME:$CIRCLE_SHA1
             docker push $IMAGE_NAME:$CIRCLE_SHA1
       - run:
           name: Install envsubst
