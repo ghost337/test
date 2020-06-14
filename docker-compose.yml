@@ -6,12 +6,12 @@ x-restart-policy: &restart_policy
 services:
   nginx:
     <<: *restart_policy
-    image: ${IMAGE_NAME}:mainline
+    image: $IMAGE_NAME:$CIRCLE_SHA1
     build:
       context: .
       dockerfile: Dockerfile.nginx
     environment:
-      mykey: ${mykey}
+      mykey: $mykey
     ports:
       - '80:80/tcp'
       - '443:443/tcp'
