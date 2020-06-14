@@ -6,7 +6,7 @@ x-restart-policy: &restart_policy
 services:
   nginx:
     <<: *restart_policy
-    image: ${IMAGE_NAME}:${CIRCLE_SHA1}
+    image: ${IMAGE_NAME}:mainline
     build:
       context: .
       dockerfile: Dockerfile.nginx
