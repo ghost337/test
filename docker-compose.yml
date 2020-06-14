@@ -9,7 +9,7 @@ services:
     image: user12/nginx:mainline
     build:
       context: .
-      dockerfile: ./Dockerfile.nginx
+      dockerfile: Dockerfile.nginx
     environment:
       mykey: "$mykey"
     ports:

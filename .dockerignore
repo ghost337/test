@@ -10,6 +10,5 @@ data/
 .travis.yml
 .circleci
 scripts
-nginx
 install.sh
 test.sh
